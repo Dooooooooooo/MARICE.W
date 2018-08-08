@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Debug Scenes/Debug Scene 01.unity
+- path: Assets/Scenes/Before Scenes/Select.unity
   isLoaded: 1
   isActive: 1

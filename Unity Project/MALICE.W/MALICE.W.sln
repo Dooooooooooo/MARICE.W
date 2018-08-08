@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio for Mac
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MALICE.W", "Assembly-CSharp.csproj", "{D4473F0B-A133-8308-3979-AE7E82FBD82F}"
 EndProject
 Global

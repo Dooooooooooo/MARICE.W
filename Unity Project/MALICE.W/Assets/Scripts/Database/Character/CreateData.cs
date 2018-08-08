@@ -89,7 +89,7 @@ public class CreateData : MonoBehaviour
         for (int i = 1; i <= 20; i++){
             
             string filename = CreateFilename(i);
-            string json_box = File.ReadAllText(Application.dataPath + "/Jsonfiles/" + filename);
+            string json_box = File.ReadAllText(Application.dataPath + "/Prefabs//Database/Jsonfiles/" + filename);
             Character json_read_box = new Character();
             json_read_box = JsonUtility.FromJson<Character>(json_box);
             //chara.setID(json_read_box.getID());
@@ -136,7 +136,7 @@ public class CreateData : MonoBehaviour
                     string json = JsonUtility.ToJson(chara);
                     //ここで見えない場所にいるから取得できない？
                     //全部get()で貰いつづければいける？
-                    File.WriteAllText(Application.dataPath + "/Jsonfiles/" + filename, json);
+                    File.WriteAllText(Application.dataPath + "/Prefabs//Database/Jsonfiles/" + filename, json);
                 }
             }
         }
