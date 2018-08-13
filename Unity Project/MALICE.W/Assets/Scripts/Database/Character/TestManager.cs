@@ -20,13 +20,13 @@ public class TestManager : MonoBehaviour {
 
         string json = m_JSONConverter.ConvertToJSON(playerInfos);
         string filepath = Application.dataPath + "/Jsonfiles/Testdata.json";
-        //•ø¤­Şz¤ß
+        //æ›¸ãè¾¼ã¿
         m_FileReaderWriter.Write(new List<string> { json }, filepath);
 
 
 
 
-        //Õi¤ßŞz¤ß
+        //èª­ã¿è¾¼ã¿
         List<string> text = m_FileReaderWriter.Read(filepath);
         string t = text[0];
         List<PlayerInfo> result = m_JSONConverter.ConvertFromJSONToList<PlayerInfo>(t);
