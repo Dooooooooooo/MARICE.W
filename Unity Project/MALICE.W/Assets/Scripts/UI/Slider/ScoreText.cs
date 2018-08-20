@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;  ////ここを追加////
+using UnityEngine.UI;  
 
 public class ScoreText : MonoBehaviour
 {
     public int score = 0;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {
