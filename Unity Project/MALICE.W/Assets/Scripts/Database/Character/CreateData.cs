@@ -57,7 +57,6 @@ public class Character
     {
         this.m_PLAYTIME = play_time;
     }
-
 }
 
 public class CreateData : MonoBehaviour
@@ -65,6 +64,11 @@ public class CreateData : MonoBehaviour
     //各種宣言
     public ToggleGroup toggleGroup;
     public InputField NameField;
+    public DataCheck dataCheck;
+    public CharaName charaName;
+    public CharaSex charaSex;
+    public CreateButtom createButtom;
+    public CanselButtom canselButtom;
     Character chara = new Character();
 
     void Start()
@@ -81,25 +85,24 @@ public class CreateData : MonoBehaviour
     int flag = 0;//JSONの作成用フラグ
     int score = 0;//スコア初期値
     int time = 0;//タイム初期値
-
+    int id_box = 0;
 
 
     public void onClick()
     {
-        for (int i = 1; i <= 20; i++){
+        for (int i = 1; i <= 10; i++){
             
             string filename = CreateFilename(i);
-            string json_box = File.ReadAllText(Application.dataPath + "/Prefabs//Database/Jsonfiles/" + filename);
+            string json_box = File.ReadAllText(Application.dataPath + "/Prefabs/Database/Jsonfiles/" + filename);
             Character json_read_box = new Character();
             json_read_box = JsonUtility.FromJson<Character>(json_box);
-            //chara.setID(json_read_box.getID());
             chara.setNAME(json_read_box.getNAME());
 
-            //名前空ならデータなしと判断
-            if (chara.getNAME() == "")
-            {
-                Debug.Log(i + "は良い");
 
+
+            //名前空ならデータなしと判断
+            if (chara.getNAME() == "" && flag == 0)
+            {
                 //InputFieldのデータを受け取る
                 Text tex = GameObject.Find("Text").GetComponent<Text>();
                 if (tex.text == "")
@@ -125,20 +128,22 @@ public class CreateData : MonoBehaviour
                     chara.setSEX(selectedLabel);
                     chara.setHIGHSCORE(score);
                     chara.setPLAYTIME(time);
-
-                    //あとで消す
-                    Debug.Log("ID : " + chara.getID());
-                    Debug.Log("user : " + chara.getNAME());
-                    Debug.Log("sex : " + chara.getSEX());
-                    Debug.Log("HighScore : " + chara.getHIGHSCORE());
-                    Debug.Log("PlayTime : " + chara.getPLAYTIME());
-
                     string json = JsonUtility.ToJson(chara);
                     //ここで見えない場所にいるから取得できない？
                     //全部get()で貰いつづければいける？
                     File.WriteAllText(Application.dataPath + "/Prefabs//Database/Jsonfiles/" + filename, json);
+                    flag = 3;
+
                 }
             }
+        }
+        if(flag == 3)
+        {
+            dataCheck.GetComponent<DataCheck>().flag_get = (int)flag;
+            charaName.GetComponent<CharaName>().num = chara.getID();
+            charaSex.GetComponent<CharaSex>().num = chara.getID();
+            createButtom.GetComponent<CreateButtom>().num = chara.getID();
+            canselButtom.GetComponent<CanselButtom>().num = chara.getID();
         }
     }
 

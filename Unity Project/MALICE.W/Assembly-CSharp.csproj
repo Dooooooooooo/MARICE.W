@@ -61,7 +61,12 @@
   <ItemGroup>
     <Compile Include="Assets\Doo Packages\File Reader Writer\Scripts\FileReaderWriter.cs" />
     <Compile Include="Assets\Doo Packages\JSON Converter\Scripts\JSONConverter.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\CanselButtom.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\CharaName.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\CharaSex.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\CreateButtom.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CreateData.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\DataCheck.cs" />
     <Compile Include="Assets\Scripts\Database\Character\PlayerCharacter\Input\InputHandler.cs" />
     <Compile Include="Assets\Scripts\Database\Character\TestManager.cs" />
     <Compile Include="Assets\Scripts\UI\MoveScene\MoveContinue.cs" />
