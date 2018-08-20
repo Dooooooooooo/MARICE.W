@@ -7,57 +7,6 @@ using System.IO;
 using System;
 
 //初期宣言
-[Serializable]
-public class Character
-{
-  
-    [SerializeField] int m_ID;
-    [SerializeField] string m_NAME;
-    [SerializeField] string m_SEX;
-    [SerializeField] int m_HIGHSCORE;
-    [SerializeField] int m_PLAYTIME;
-      
-
-
-    public int getID() {
-        return m_ID;
-    }
-    public void setID(int id) {
-        this.m_ID = id;
-    }
-
-    public string getNAME(){
-        return m_NAME;
-    }
-    public void setNAME(string name){
-        this.m_NAME = name;
-    }
-
-    public string getSEX(){
-        return m_SEX;
-    }
-    public void setSEX(string sex){
-        this.m_SEX = sex;
-    }
-
-    public int getHIGHSCORE()
-    {
-        return m_HIGHSCORE;
-    }
-    public void setHIGHSCORE(int high_score)
-    {
-        this.m_HIGHSCORE = high_score;
-    }
-
-    public int getPLAYTIME()
-    {
-        return m_PLAYTIME;
-    }
-    public void setPLAYTIME(int play_time)
-    {
-        this.m_PLAYTIME = play_time;
-    }
-}
 
 public class CreateData : MonoBehaviour
 {
@@ -98,7 +47,7 @@ public class CreateData : MonoBehaviour
             json_read_box = JsonUtility.FromJson<Character>(json_box);
             chara.setNAME(json_read_box.getNAME());
 
-
+            string selectedLabel = "";
 
             //名前空ならデータなしと判断
             if (chara.getNAME() == "" && flag == 0)
@@ -111,13 +60,13 @@ public class CreateData : MonoBehaviour
                     Debug.Log("Please write user name");
                 }
                 //Toggleのデータを受け取る
-                string selectedLabel = toggleGroup.ActiveToggles()
-                        .First().GetComponentsInChildren<Text>()
-                        .First(t => t.name == "Label").text;
-                if (selectedLabel == "")
-                {
+                if(toggleGroup.AnyTogglesOn()) { //トグルに値が入っているなら
+                    selectedLabel = toggleGroup.ActiveToggles()
+                                                .First().GetComponentsInChildren<Text>()
+                                                .First(t => t.name == "Label").text;
+                } else {
                     flag = 1;
-                    Debug.Log("Please chose user sex");
+                    Debug.Log("Please choose user sex");
                 }
 
                 //To Json
@@ -131,9 +80,8 @@ public class CreateData : MonoBehaviour
                     string json = JsonUtility.ToJson(chara);
                     //ここで見えない場所にいるから取得できない？
                     //全部get()で貰いつづければいける？
-                    File.WriteAllText(Application.dataPath + "/Prefabs//Database/Jsonfiles/" + filename, json);
+                    File.WriteAllText(Application.dataPath + "/Prefabs/Database/Jsonfiles/" + filename, json);
                     flag = 3;
-
                 }
             }
         }
@@ -145,6 +93,8 @@ public class CreateData : MonoBehaviour
             createButtom.GetComponent<CreateButtom>().num = chara.getID();
             canselButtom.GetComponent<CanselButtom>().num = chara.getID();
         }
+
+        flag = 0; //フラグのリセット
     }
 
 }
