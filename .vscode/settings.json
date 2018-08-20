@@ -53,6 +53,6 @@
         "temp/":true,
         "Temp/":true
     },
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
     "editor.insertSpaces": true
 }
