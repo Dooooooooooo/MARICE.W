@@ -3,7 +3,7 @@
 import sys
 import os
 
-PATH_TO_JSONFILES = os.path.abspath(__file__) + "../Unity Project/MALICE.W/Assets/Prefabs/Database/Jsonfiles"
+PATH_TO_JSONFILES = os.path.dirname(os.path.abspath(__file__)) + "/../Unity Project/MALICE.W/Assets/Prefabs/Database/Jsonfiles"
 placeholder       = '{"m_ID":%s,"m_NAME":"","m_SEX":"","m_HIGHSCORE":0,"m_PLAYTIME":0}'
 
 def make_file(id):
@@ -24,7 +24,7 @@ def main(args):
             end   = int(param[1])
             print("Create file No. %d - %d..." % (start, end), end=' ')
             
-            for i in range(start, end):
+            for i in range(start, end + 1):
                 make_file(i)
             
             print("Done.")
