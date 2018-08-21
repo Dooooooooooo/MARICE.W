@@ -11,7 +11,9 @@ using System;
 [Serializable]
 public class Character
 {
-  
+    private const string PATH_TO_DB_JSONFILES = "/Prefabs/Database/Jsonfiles/chara_data_";
+
+    //JSONに書き出されるフィールド
     [SerializeField] int m_ID;
     [SerializeField] string m_NAME;
     [SerializeField] string m_SEX;
@@ -19,7 +21,7 @@ public class Character
     [SerializeField] int m_PLAYTIME;
       
 
-
+    /* ゲッター・セッター？ */
     public int getID() {
         return m_ID;
     }
@@ -57,5 +59,25 @@ public class Character
     public void setPLAYTIME(int play_time)
     {
         this.m_PLAYTIME = play_time;
+    }
+
+    /* ロード・セーブ処理 */
+    public static string FileOf(int arg)
+    {
+        return Application.dataPath + PATH_TO_DB_JSONFILES + arg.ToString() + ".json";
+    }
+    public void WriteToJson() {
+        File.WriteAllText(FileOf(m_ID), JsonUtility.ToJson(this));
+    }
+
+    public static Character ReadFrom(string filepath) {
+        string json_box = File.ReadAllText(filepath);
+        Character json_read_box = new Character();
+        json_read_box = JsonUtility.FromJson<Character>(json_box);
+        return json_read_box;
+    }
+
+    public static Character ReadFrom(int id) {
+        return ReadFrom(FileOf(id));
     }
 }
