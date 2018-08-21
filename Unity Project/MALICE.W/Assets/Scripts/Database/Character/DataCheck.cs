@@ -17,10 +17,6 @@ public class DataCheck : MonoBehaviour {
     [SerializeField]
     GameObject canvas;
 	
-
-   // public CharaName charaName;
-
-
     void Update()
     {
         if (flag_get == 3)

@@ -62,6 +62,7 @@
     <Compile Include="Assets\Doo Packages\File Reader Writer\Scripts\FileReaderWriter.cs" />
     <Compile Include="Assets\Doo Packages\JSON Converter\Scripts\JSONConverter.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CanselButtom.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\Character.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CharaName.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CharaSex.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CreateButtom.cs" />
