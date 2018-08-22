@@ -95,10 +95,10 @@ public class CreateData : MonoBehaviour
         dataCheck.GetComponent<DataCheck>().flag_get  = 3;            //成功フラグ
 
         //IDで渡すのではなくCharacterを渡せないものか...（かえるむ）
-        charaName.GetComponent<CharaName>().num       = chara.getID();
-        charaSex.GetComponent<CharaSex>().num         = chara.getID();
-        createButtom.GetComponent<CreateButtom>().num = chara.getID();
-        canselButtom.GetComponent<CanselButtom>().num = chara.getID();
+        charaName.GetComponent<CharaName>().Chara_Name_num = chara.getID();
+        charaSex.GetComponent<CharaSex>().Chara_Sex_num = chara.getID();
+        createButtom.GetComponent<CreateButtom>().Create_Button_num = chara.getID();
+        canselButtom.GetComponent<CanselButtom>().Cansel_Button_num = chara.getID();
     }
 
 }

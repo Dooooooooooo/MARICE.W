@@ -63,8 +63,11 @@
     <Compile Include="Assets\Doo Packages\JSON Converter\Scripts\JSONConverter.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CanselButtom.cs" />
     <Compile Include="Assets\Scripts\Database\Character\Character.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\CharaHighScore.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CharaName.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\CharaPlayTime.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CharaSex.cs" />
+    <Compile Include="Assets\Scripts\Database\Character\ContinueData.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CreateButtom.cs" />
     <Compile Include="Assets\Scripts\Database\Character\CreateData.cs" />
     <Compile Include="Assets\Scripts\Database\Character\DataCheck.cs" />
