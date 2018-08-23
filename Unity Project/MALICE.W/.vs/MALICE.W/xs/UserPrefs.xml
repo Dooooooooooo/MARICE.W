@@ -2,18 +2,7 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Database/Character/ContinueData.cs">
     <Files>
-      <File FileName="Assets/Scripts/Database/Character/ContinueData.cs" Line="24" Column="30" />
-      <File FileName="Assets/Scripts/Database/Character/CreateData.cs" Line="97" Column="47" />
-      <File FileName="Assets/Scripts/Database/Character/DataCheck.cs" Line="21" Column="6" />
-      <File FileName="Assets/Scripts/Database/Character/CanselButtom.cs" Line="4" Column="35" />
-      <File FileName="Assets/Scripts/Database/Character/Character.cs" Line="43" Column="22" />
-      <File FileName="Assets/Scripts/Database/Character/CharaName.cs" Line="20" Column="1" />
-      <File FileName="Assets/Scripts/Database/Character/CharaSex.cs" Line="12" Column="6" />
-      <File FileName="Assets/Scripts/Database/Character/CharaPlayTime.cs" Line="9" Column="5" />
-      <File FileName="Assets/Scripts/Database/Character/CharaHighScore.cs" Line="19" Column="2" />
-      <File FileName="Assets/Scripts/Database/Character/CreateButtom.cs" Line="6" Column="26" />
-      <File FileName="Assets/Scripts/UI/Slider/ScoreText.cs" Line="7" Column="5" />
-      <File FileName="Assets/Scripts/UI/Slider/SliderValue.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Database/Character/ContinueData.cs" Line="18" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
