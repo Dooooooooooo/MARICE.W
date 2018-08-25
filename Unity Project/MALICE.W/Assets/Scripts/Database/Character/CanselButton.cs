@@ -3,17 +3,17 @@ using UnityEngine.UI;
 using System.IO;//Fileコマンドにつかう
 using UnityEngine.SceneManagement;
 
-public class CanselButtom : MonoBehaviour {
+public class CanselButton : MonoBehaviour {
 
-    public int Cansel_Button_num;
+    public int num = 0;
 
     public void onClick()
     {
-        if(Cansel_Button_num != 0) //ここで消去する意味とは...
+        if(num != 0) //ここで消去する意味とは...
         {
             Character chara = new Character();
 
-            chara.setID(Cansel_Button_num);
+            chara.setID(num);
             chara.setNAME("");
             chara.setSEX("");
             chara.setHIGHSCORE(0);
@@ -21,7 +21,7 @@ public class CanselButtom : MonoBehaviour {
 
             chara.WriteToJson();
 
-            Cansel_Button_num = 0;
+            num = 0;
         }
 
         SceneManager.LoadScene("Create"); //ほんとうはこれだけにしたい

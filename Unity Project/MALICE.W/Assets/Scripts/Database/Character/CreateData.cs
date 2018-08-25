@@ -16,8 +16,8 @@ public class CreateData : MonoBehaviour
     public DataCheck dataCheck;
     public CharaName charaName;
     public CharaSex charaSex;
-    public CreateButtom createButtom;
-    public CanselButtom canselButtom;
+    public CreateButton createButtom;
+    public CanselButton canselButtom;
     //Character chara = new Character();
 
     //さすがに複数扱うことはないでしょう...
@@ -95,10 +95,10 @@ public class CreateData : MonoBehaviour
         dataCheck.GetComponent<DataCheck>().flag_get  = 3;            //成功フラグ
 
         //IDで渡すのではなくCharacterを渡せないものか...（かえるむ）
-        charaName.GetComponent<CharaName>().Chara_Name_num = chara.getID();
-        charaSex.GetComponent<CharaSex>().Chara_Sex_num = chara.getID();
-        createButtom.GetComponent<CreateButtom>().Create_Button_num = chara.getID();
-        canselButtom.GetComponent<CanselButtom>().Cansel_Button_num = chara.getID();
+        charaName.GetComponent<CharaName>().num = chara.getID();
+        charaSex.GetComponent<CharaSex>().num = chara.getID();
+        createButtom.GetComponent<CreateButton>().num = chara.getID();
+        canselButtom.GetComponent<CanselButton>().num = chara.getID();
     }
 
 }
