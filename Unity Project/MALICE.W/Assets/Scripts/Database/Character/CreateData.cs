@@ -18,6 +18,7 @@ public class CreateData : MonoBehaviour
     public DataCheck dataCheck;
     public CharaName charaName;
     public CharaSex charaSex;
+
     public CreateButtom createButtom;
     public CanselButtom canselButtom;
 
@@ -112,11 +113,6 @@ public class CreateData : MonoBehaviour
         canselButtom.GetComponent<CanselButtom>().Cansel_Button_num = chara.getID();
 
         dataCheck.GetComponent<DataCheck>().flag_get  = 3;            //成功フラグ
-
-        //IDで渡すのではなくCharacterを渡せないものか...（かえるむ）
-        //charaName.GetComponent<CharaName>().Chara_Name_num = chara.getID();
-        /*_name.NotifyUpdate();
-        charaSex.GetComponent<CharaSex>().Chara_Sex_num             = chara.getID();*/
     }
 
 }
