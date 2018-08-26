@@ -81,4 +81,5 @@ public class Character
     public static Character ReadFrom(int id) {
         return ReadFrom(FileOf(id));
     }
+
 }

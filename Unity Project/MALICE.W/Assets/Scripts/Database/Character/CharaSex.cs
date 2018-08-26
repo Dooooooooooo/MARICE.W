@@ -6,15 +6,15 @@ public class CharaSex : MonoBehaviour
 {
 
     public string text;
-    public int Chara_Sex_num = 0;//今のIDを受け取る
+    public int num = 0;//今のIDを受け取る
 
     void Update()
     {
-        if(Chara_Sex_num != 0)
+        if(num != 0)
         {
-            Character chara = Character.ReadFrom(Chara_Sex_num);
+            Character chara = Character.ReadFrom(num);
             this.GetComponent<Text>().text = chara.getSEX();
-            Chara_Sex_num = 0;
+            num = 0;
         }
     }
 }
