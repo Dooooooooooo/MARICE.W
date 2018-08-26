@@ -6,6 +6,8 @@ using System.Linq;
 using System.IO;
 using System;
 
+using MW.UI;
+
 //初期宣言
 
 public class CreateData : MonoBehaviour
@@ -18,15 +20,29 @@ public class CreateData : MonoBehaviour
     public CharaSex charaSex;
     public CreateButtom createButtom;
     public CanselButtom canselButtom;
+
+    [SerializeField] GameObject m_characterNameField;
+    [SerializeField] GameObject m_characterSexField;
+
+    private CharacterField _name;
     //Character chara = new Character();
 
     //さすがに複数扱うことはないでしょう...
-    public static Character character = new Character();
+    public static UpdateObservable<Character> character
+        = new UpdateObservable<Character>(new Character());
 
     void Start()
     {
         //名前受けとる
         NameField = GetComponent<InputField>();
+
+        m_characterNameField.GetComponent<CharacterField>()
+                            .Bind(character)
+                            .WithFormat(c => c.getNAME());
+        
+        m_characterSexField.GetComponent<CharacterField>()
+                           .Bind(character)
+                           .WithFormat(c => c.getSEX());
     }
 
     IEnumerable<int> AvailableJSONFile() {
@@ -90,15 +106,17 @@ public class CreateData : MonoBehaviour
             break; //ファイルが書き込めたら終了
         }
 
-        character = chara; //作製したキャラクターを外から見えるようにする
+        character.SetValue(chara); //作製したキャラクターを外から見えるようにする
+        
+        createButtom.GetComponent<CreateButtom>().Create_Button_num = chara.getID();
+        canselButtom.GetComponent<CanselButtom>().Cansel_Button_num = chara.getID();
 
         dataCheck.GetComponent<DataCheck>().flag_get  = 3;            //成功フラグ
 
         //IDで渡すのではなくCharacterを渡せないものか...（かえるむ）
-        charaName.GetComponent<CharaName>().Chara_Name_num = chara.getID();
-        charaSex.GetComponent<CharaSex>().Chara_Sex_num = chara.getID();
-        createButtom.GetComponent<CreateButtom>().Create_Button_num = chara.getID();
-        canselButtom.GetComponent<CanselButtom>().Cansel_Button_num = chara.getID();
+        //charaName.GetComponent<CharaName>().Chara_Name_num = chara.getID();
+        /*_name.NotifyUpdate();
+        charaSex.GetComponent<CharaSex>().Chara_Sex_num             = chara.getID();*/
     }
 
 }
