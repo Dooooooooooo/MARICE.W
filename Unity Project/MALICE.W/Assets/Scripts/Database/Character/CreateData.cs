@@ -19,8 +19,8 @@ public class CreateData : MonoBehaviour
     public CharaName charaName;
     public CharaSex charaSex;
 
-    public CreateButtom createButtom;
-    public CanselButtom canselButtom;
+    public CreateButton createButton;
+    public CanselButton canselButton;
 
     [SerializeField] GameObject m_characterNameField;
     [SerializeField] GameObject m_characterSexField;
@@ -109,8 +109,8 @@ public class CreateData : MonoBehaviour
 
         character.SetValue(chara); //作製したキャラクターを外から見えるようにする
         
-        createButtom.GetComponent<CreateButtom>().Create_Button_num = chara.getID();
-        canselButtom.GetComponent<CanselButtom>().Cansel_Button_num = chara.getID();
+        createButton.GetComponent<CreateButton>().num = chara.getID();
+        canselButton.GetComponent<CanselButton>().num = chara.getID();
 
         dataCheck.GetComponent<DataCheck>().flag_get  = 3;            //成功フラグ
     }

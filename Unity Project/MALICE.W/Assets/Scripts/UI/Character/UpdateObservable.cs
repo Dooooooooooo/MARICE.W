@@ -9,8 +9,11 @@ namespace MW.UI {
     {
         void NotifyUpdate();
     }
+
     public class UpdateObservable<T> {
-        List<IUpdateObserver> _observers = new List<IUpdateObserver>();
+        List<IUpdateObserver> _observers         = new List<IUpdateObserver>();
+        List<Action<T>>       _observerFunctions = new List<Action<T>>();
+        List<Action<T>>       _observerFOnce     = new List<Action<T>>();
         T                     _item;
 
         public UpdateObservable(T t) {
@@ -25,8 +28,12 @@ namespace MW.UI {
             NotifyUpdate();
         }
 
+
         public void NotifyUpdate() {
             foreach(var a in _observers) a.NotifyUpdate();
+            foreach(var f in _observerFunctions) f(_item);
+            foreach(var f in _observerFOnce) f(_item);
+            _observerFOnce = new List<Action<T>>();
         }
         public void Subscribe(IUpdateObserver observer) {
             _observers.Add(observer);
@@ -35,5 +42,18 @@ namespace MW.UI {
         public void Unsubscribe(IUpdateObserver observer) {
             _observers.Remove(observer);
         }
+
+        public void Attach(Action<T> f) {
+            _observerFunctions.Add(f);
+        }
+
+        public void AttachOnce(Action<T> f) {
+            _observerFOnce.Add(f);
+        }
+
+        public void Deattach(Action<T> f) {
+            _observerFunctions.Remove(f);
+        }
+
     };
 };

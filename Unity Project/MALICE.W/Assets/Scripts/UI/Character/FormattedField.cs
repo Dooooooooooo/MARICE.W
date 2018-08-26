@@ -49,13 +49,3 @@ namespace MW.UI {
 		}
 	}
 }
-
-/*
-
-var nameField = name.AddComponent<FormattedField<Character>>();
-nameField.Bind(_ => chara)
-		 .WithFormat(c => c.GetNAME());
-
-nameField.NotifyUpdate();
-
- */

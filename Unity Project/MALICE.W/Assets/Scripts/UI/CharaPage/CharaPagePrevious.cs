@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.IO;//Fileコマンドにつかう
 using UnityEngine.SceneManagement;
 
+using MW.UI;
+
 public class CharaPagePrevious : MonoBehaviour
 {
 
@@ -10,16 +12,7 @@ public class CharaPagePrevious : MonoBehaviour
 
     public void onClick()
     {
-        if (CharaPagePreviousNum != 0)
-        {
-            Page page = Page.ReadFrom();
-            int box = page.getPAGE() - 1;
-            page.setPage(box);
-            page.WriteToJson();
-            SceneManager.LoadScene("Continue");
-        }
-
-        //ContinueDataのフラグに返したい
+        CharaPager.instance.PrevPage();
     }
 
 }
