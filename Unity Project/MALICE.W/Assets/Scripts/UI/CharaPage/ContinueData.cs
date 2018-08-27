@@ -11,39 +11,54 @@ public class ContinueData : MonoBehaviour
 
     [SerializeField]
     GameObject canvas;
+
     [SerializeField]
-    public GameObject[] Foundation = new GameObject[6];
-    [SerializeField]
-    public GameObject[] Name = new GameObject[6];
-    [SerializeField]
-    public GameObject[] HighScore = new GameObject[6];
-    [SerializeField]
-    public GameObject[] PlayTime = new GameObject[6];
-    [SerializeField]
-    public GameObject[] CharaConfirm = new GameObject[6];
-    [SerializeField]
-    public GameObject NowPage;
-    [SerializeField]
-    public GameObject CharaNextPage;
-    [SerializeField]
-    public GameObject CharaPreviousPage;
-    [SerializeField]
-    public CharaName[] charaName = new CharaName[6];
-    [SerializeField]
-    public CharaHighScore[] charaHighScore = new CharaHighScore[6];
-    [SerializeField]
-    public CharaPlayTime[] charaPlayTime = new CharaPlayTime[6];
-    [SerializeField]
-    public CharaConfirm[] charaConfirm = new CharaConfirm[6];
-    [SerializeField]
-    public CharaPageNext charaPageNext;
-    [SerializeField]
-    public CharaPagePrevious charaPagePrevious;
-    [SerializeField]
-    public NowPage nowPage;
+    public List<GameObject> Foundation = new List<GameObject>();
+
+    /*[SerializeField]
+    public GameObject[] Foundation = new GameObject[6];*/
+    //[SerializeField]
+    private GameObject[] Name = new GameObject[6];
+    private GameObject[] HighScore = new GameObject[6];
+    private GameObject[] PlayTime = new GameObject[6];
+    private GameObject[] CharaConfirm = new GameObject[6];
+    
+    [SerializeField] private GameObject NowPage;
+    [SerializeField] private GameObject CharaNextPage;
+    [SerializeField] private GameObject CharaPreviousPage;
+
+    private CharaName[] charaName = new CharaName[6];
+    private CharaHighScore[] charaHighScore = new CharaHighScore[6];
+    private CharaPlayTime[] charaPlayTime = new CharaPlayTime[6];
+    private CharaConfirm[] charaConfirm = new CharaConfirm[6];
+
+    private CharaPageNext charaPageNext;
+    private CharaPagePrevious charaPagePrevious;
+    private NowPage nowPage;
+
+
     private Action<CharaPager> _pagerUpdated;
     void Start()
     {
+        //FoundationオブジェクトからGameObject類を取得する
+        for(int i = 0;i < 6; i++) {
+            Transform _ft = Foundation[i].transform;
+
+            Name[i]           = _ft.GetChild(0).gameObject;
+            HighScore[i]      = _ft.GetChild(1).gameObject;
+            PlayTime[i]       = _ft.GetChild(2).gameObject;
+            CharaConfirm[i]   = _ft.GetChild(3).gameObject;
+
+            charaName[i]      = Name[i].GetComponent<CharaName>();
+            charaHighScore[i] = HighScore[i].GetComponent<CharaHighScore>();
+            charaPlayTime[i]  = PlayTime[i].GetComponent<CharaPlayTime>();
+            charaConfirm[i]   = CharaConfirm[i].GetComponent<CharaConfirm>();
+        }
+
+        charaPageNext     = CharaNextPage.GetComponent<CharaPageNext>();
+        charaPagePrevious = CharaPreviousPage.GetComponent<CharaPagePrevious>();
+        nowPage           = NowPage.GetComponent<NowPage>();
+
         //ページャーのインスタンスを取得する
         CharaPager pager = CharaPager.instance;
 
@@ -91,11 +106,12 @@ public class ContinueData : MonoBehaviour
 
         for(int i = 0; i < characters.Count; i++) {
             var c = characters[i];
+
             charaName[i].GetComponent<CharaName>().num = c.getID();
             charaHighScore[i].GetComponent<CharaHighScore>().num = c.getID();
             charaPlayTime[i].GetComponent<CharaPlayTime>().num = c.getID();
             charaConfirm[i].GetComponent<CharaConfirm>().num = c.getID();
-
+            
             Foundation[i].SetActive(true);
             Name[i].SetActive(true);
             HighScore[i].SetActive(true);
