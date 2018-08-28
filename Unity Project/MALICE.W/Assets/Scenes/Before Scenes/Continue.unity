@@ -1422,7 +1422,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1378216262351792, guid: ac03c454980224e09a966fc2002c17a7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114419311765376514, guid: ac03c454980224e09a966fc2002c17a7,
+        type: 2}
+      propertyPath: m_Text
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac03c454980224e09a966fc2002c17a7, type: 2}
@@ -1712,7 +1717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b6d8e4389293b43aeb242cf209c41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 1459133032}
   Foundation:
   - {fileID: 1255203411}
   - {fileID: 1939897656}
@@ -1827,7 +1832,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1066231382902664, guid: aa1e6a059adbd40f9b2cef7b19248f0b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114233749133845102, guid: aa1e6a059adbd40f9b2cef7b19248f0b,
+        type: 2}
+      propertyPath: m_Text
+      value: 114514
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa1e6a059adbd40f9b2cef7b19248f0b, type: 2}
@@ -2968,7 +2978,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1176630082432366, guid: def0c7fbf759b4d9bb19fbf3000f4544, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: def0c7fbf759b4d9bb19fbf3000f4544, type: 2}
@@ -3474,12 +3484,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1988664773498258, guid: f36a2988f43c84972ad146e289549a66, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114834150674934510, guid: f36a2988f43c84972ad146e289549a66,
         type: 2}
       propertyPath: m_Text
-      value: 
+      value: nomay
       objectReference: {fileID: 0}
     - target: {fileID: 114834150674934510, guid: f36a2988f43c84972ad146e289549a66,
         type: 2}
@@ -3796,7 +3806,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1745083926954894, guid: ca650d2fb1e6f46809e41a792bd3f114, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca650d2fb1e6f46809e41a792bd3f114, type: 2}

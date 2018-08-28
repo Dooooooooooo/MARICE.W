@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace MW.UI {
-    class CharaPager {
+    class CharaPager : IObservable<UpdateObservant<CharaPager>> {
         //定数
         public const int CHARACTER_PER_PAGE = 6;
 
@@ -38,6 +38,7 @@ namespace MW.UI {
                     _currentPage = bak;
                     throw new IndexOutOfRangeException("Wrong index of page.");
                 }
+                NotifyUpdate();
             }
         }
 
@@ -48,9 +49,10 @@ namespace MW.UI {
             }
         }
 
-        public UpdateObservable<CharaPager> Observe() {
+        public UpdateObservant<CharaPager> Observe() {
             return _pagerObserver;
         }
+
 
         public void NextPage() {
             _currentPage++;
@@ -74,11 +76,11 @@ namespace MW.UI {
         private int  _currentPage           = 0;
 
         private List<Character> _characters = new List<Character>();
-        private UpdateObservable<CharaPager> _pagerObserver;
+        private UpdateObservant<CharaPager> _pagerObserver;
 
         //コンストラクタはプライベート
         private CharaPager() {
-            _pagerObserver = new UpdateObservable<CharaPager>(this);
+            _pagerObserver = new UpdateObservant<CharaPager>(this);
         }
 
         private void NotifyUpdate() {
@@ -107,7 +109,7 @@ namespace MW.UI {
         }
 
         private List<Character> GetCharacterOnCurrentPage() {
-            return _characters.Splice(_currentPage * CHARACTER_PER_PAGE,
+            return _characters.SpliceND(_currentPage * CHARACTER_PER_PAGE,
                                         CHARACTER_PER_PAGE);
         }
     };

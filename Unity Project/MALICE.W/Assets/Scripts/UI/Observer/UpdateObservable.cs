@@ -5,18 +5,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace MW.UI {
-    public interface IUpdateObserver
-    {
-        void NotifyUpdate();
-    }
+    public interface IUpdateObserver<T> : IObserver<UpdateObservant<T>> {}
 
-    public class UpdateObservable<T> {
-        List<IUpdateObserver> _observers         = new List<IUpdateObserver>();
+    public class UpdateObservant<T> : IObservant<IUpdateObserver<T>> {
+        List<IUpdateObserver<T>> _observers         = new List<IUpdateObserver<T>>();
         List<Action<T>>       _observerFunctions = new List<Action<T>>();
         List<Action<T>>       _observerFOnce     = new List<Action<T>>();
         T                     _item;
 
-        public UpdateObservable(T t) {
+        public UpdateObservant(T t) {
             _item = t;
         }
 
@@ -28,18 +25,21 @@ namespace MW.UI {
             NotifyUpdate();
         }
 
+        public void Fire() {
+            NotifyUpdate();
+        }
 
         public void NotifyUpdate() {
-            foreach(var a in _observers) a.NotifyUpdate();
+            foreach(var a in _observers) a.Handle(this);
             foreach(var f in _observerFunctions) f(_item);
             foreach(var f in _observerFOnce) f(_item);
             _observerFOnce = new List<Action<T>>();
         }
-        public void Subscribe(IUpdateObserver observer) {
+        public void Subscribe(IUpdateObserver<T> observer) {
             _observers.Add(observer);
         }
 
-        public void Unsubscribe(IUpdateObserver observer) {
+        public void Unsubscribe(IUpdateObserver<T> observer) {
             _observers.Remove(observer);
         }
 

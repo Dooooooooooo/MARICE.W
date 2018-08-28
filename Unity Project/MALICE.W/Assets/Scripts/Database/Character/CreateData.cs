@@ -29,8 +29,8 @@ public class CreateData : MonoBehaviour
     //Character chara = new Character();
 
     //さすがに複数扱うことはないでしょう...
-    public static UpdateObservable<Character> character
-        = new UpdateObservable<Character>(new Character());
+    public static UpdateObservant<Character> character
+        = new UpdateObservant<Character>(new Character());
 
     void Start()
     {

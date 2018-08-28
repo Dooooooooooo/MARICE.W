@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace MW.UI {
-	public class FormattedField<T> : MonoBehaviour, IUpdateObserver {
-		UpdateObservable<T> _observable        = null;
+	public class FormattedField<T> : MonoBehaviour, IUpdateObserver<T> {
+		UpdateObservant<T> _observable        = null;
 		Func<T>             _receiver          = null;
 
 		Func<T, string>     _formatter         = _ => "(empty)";
@@ -18,7 +18,7 @@ namespace MW.UI {
 			return this;
 		}
 
-		public FormattedField<T> Bind(UpdateObservable<T> observable) {
+		public FormattedField<T> Bind(UpdateObservant<T> observable) {
 			_observable = observable;
 			_receiver   = () => _observable.GetValue();
 			observable.Subscribe(this);
@@ -30,7 +30,7 @@ namespace MW.UI {
 			return this;
 		}
 
-		public void NotifyUpdate() {
+		public void Handle(UpdateObservant<T> _) {
 			_needsUpdate = true;
 		}
 

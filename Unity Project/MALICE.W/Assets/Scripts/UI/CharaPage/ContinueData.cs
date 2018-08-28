@@ -36,8 +36,8 @@ public class ContinueData : MonoBehaviour
     private CharaPagePrevious charaPagePrevious;
     private NowPage nowPage;
 
-
     private Action<CharaPager> _pagerUpdated;
+
     void Start()
     {
         //FoundationオブジェクトからGameObject類を取得する
@@ -62,16 +62,23 @@ public class ContinueData : MonoBehaviour
         //ページャーのインスタンスを取得する
         CharaPager pager = CharaPager.instance;
 
-        //このクラスの_pagerUpdatedを監視する
+        //ページを1ページ目にしておく。
+        //pager.currentPageNumber = 0;
+
+        //ページャーが更新されたらPagerUpatedが読まれるようにする
         pager.Observe()
-             .AttachOnce(PagerUpdated);
-        
-        //現在のページ数を基にページ移動ボタンの状態を指定
-        SetVisibilityOfButtons(pager.currentPageNumber != 0,
-                               pager.currentPageNumber != (pager.pageCount - 1));
+             .Attach(PagerUpdated);
 
         //キャラクターリストを描画
         DrawCharacterList();
+    }
+
+    //Destroyされたときに呼ばれるよ
+    void OnDestroy() {
+        var pager = CharaPager.instance;
+        
+        //ページャーのイベントリスナーを外すよ
+        pager.Observe().Deattach(PagerUpdated);
     }
 
     void SetVisibilityOfButtons(bool prev, bool next) {
@@ -80,12 +87,16 @@ public class ContinueData : MonoBehaviour
     }
 
     void PagerUpdated(CharaPager pager) {
-        SceneManager.LoadScene("Continue"); //ページをリロード
+        DrawCharacterList(); //キャラクターリストの再描画
     }
 
     void DrawCharacterList() {
         //ページャーを取得
         CharaPager pager = CharaPager.instance;
+
+        //現在のページ数を基にページ移動ボタンの状態を指定
+        SetVisibilityOfButtons(pager.currentPageNumber != 0,
+                               pager.currentPageNumber != (pager.pageCount - 1));
 
         //ページ数・ページ番号を反映
         var pageIndicator = nowPage.GetComponent<NowPage>();
@@ -105,12 +116,14 @@ public class ContinueData : MonoBehaviour
         var characters = pager.currentPage;
 
         for(int i = 0; i < characters.Count; i++) {
+            //冗長すぎるデータ書き換え欄...どうにかならぬものか（かえるむ）
+
             var c = characters[i];
 
-            charaName[i].GetComponent<CharaName>().num = c.getID();
+            charaName[i].GetComponent<CharaName>().num           = c.getID();
             charaHighScore[i].GetComponent<CharaHighScore>().num = c.getID();
-            charaPlayTime[i].GetComponent<CharaPlayTime>().num = c.getID();
-            charaConfirm[i].GetComponent<CharaConfirm>().num = c.getID();
+            charaPlayTime[i].GetComponent<CharaPlayTime>().num   = c.getID();
+            charaConfirm[i].GetComponent<CharaConfirm>().num     = c.getID();
             
             Foundation[i].SetActive(true);
             Name[i].SetActive(true);

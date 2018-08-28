@@ -9,7 +9,7 @@ public class CharacterField : FormattedField<Character> {}
 
 var nameField = name.AddComponent<CharacterField>();
 nameField.Bind(_ => chara)
-		 .WithFormat(c => c.GetNAME());
+         .WithFormat(c => c.GetNAME());
 
 nameField.NotifyUpdate();
 

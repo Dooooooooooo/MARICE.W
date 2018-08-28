@@ -18,7 +18,7 @@ public class DataCheck : MonoBehaviour {
     public GameObject cansel;
     [SerializeField]
     GameObject canvas;
-	
+    
     void Update()
     {
         if (flag_get == 3)
