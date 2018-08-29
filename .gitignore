@@ -20,3 +20,8 @@
 *.pidb
 *.booproj
 *.svd
+
+#Something annoying
+.vscode/settings.json
+Unity Project/MALICE.W/.vscode/settings.json
+Unity Project/MALICE.W/ProjectSettings/ProjectVersion.txt
