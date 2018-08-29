@@ -22,13 +22,25 @@ GameObject:
   - component: {fileID: 222361002904768126}
   - component: {fileID: 114165665865329290}
   - component: {fileID: 114993209473790704}
+  - component: {fileID: 114158747690774492}
   m_Layer: 5
   m_Name: Sex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
+--- !u!114 &114158747690774492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802352719612070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119022cbbe4cb934f8c0fdb3e770781c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114165665865329290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,13 +80,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802352719612070}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57d664521758426ebb24696c99c2f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: 
-  Chara_Sex_num: 10
+  num: 0
 --- !u!222 &222361002904768126
 CanvasRenderer:
   m_ObjectHideFlags: 1
