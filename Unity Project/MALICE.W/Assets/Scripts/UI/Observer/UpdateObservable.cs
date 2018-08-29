@@ -30,9 +30,9 @@ namespace MW.UI {
         }
 
         public void NotifyUpdate() {
-            foreach(var a in _observers) a.Handle(this);
+            foreach(var a in _observers)         a.Handle(this);
             foreach(var f in _observerFunctions) f(_item);
-            foreach(var f in _observerFOnce) f(_item);
+            foreach(var f in _observerFOnce)     f(_item);
             _observerFOnce = new List<Action<T>>();
         }
         public void Subscribe(IUpdateObserver<T> observer) {
