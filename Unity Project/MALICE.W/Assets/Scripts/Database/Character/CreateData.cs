@@ -47,7 +47,7 @@ public class CreateData : MonoBehaviour
     }
 
     IEnumerable<int> AvailableJSONFile() {
-        for (int i = 1; i <= 10; i++){
+        for (int i = 1; i <= CharaPager.CHARACTER_FILE_NUMBER; i++){
             Character json_read_box = Character.ReadFrom(i);
 
             if(json_read_box.getNAME() == "") //m_NAMEが空っぽなら

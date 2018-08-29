@@ -9,6 +9,9 @@ namespace MW.UI {
         //定数
         public const int CHARACTER_PER_PAGE = 6;
 
+        //キャラファイル数
+        public const int CHARACTER_FILE_NUMBER = 50;
+
         //Singletonパターンとして実装
         private static CharaPager _instance = new CharaPager();
         
@@ -94,7 +97,7 @@ namespace MW.UI {
         private void ReloadCharacterTable() {
             _characters = new List<Character>();
 
-            for (int i = 1; i <= 10; i++) { //ファイル数によって最大値を変更
+            for (int i = 1; i <= CHARACTER_FILE_NUMBER; i++) { //ファイル数によって最大値を変更
                 Character chara = Character.ReadFrom(i);
                 if (chara.getNAME() != "") _characters.Add(chara);
             }
