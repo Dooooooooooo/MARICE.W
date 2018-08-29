@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.IO;//Fileコマンドにつかう
 using UnityEngine.SceneManagement;
+using MW.UI;
 
 public class CharaPageNext : MonoBehaviour {
 
@@ -12,17 +13,7 @@ public class CharaPageNext : MonoBehaviour {
 
     public void onClick()
     {
-        if(CharaPageNextNum != 0){
-            
-            Page page = Page.ReadFrom();
-            int box = page.getPAGE() + 1;
-            page.setPage(box);
-            page.WriteToJson();
-            SceneManager.LoadScene("Continue");
-        }
-
-
-        //ContinueDataのフラグに返したい
+        CharaPager.instance.NextPage();
     }
 
 }

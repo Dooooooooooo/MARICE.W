@@ -302,6 +302,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1140188235462464, guid: a96fbcbdfcde44b0eab872df0a83752c,
     type: 2}
   m_PrefabInternal: {fileID: 815897223}
+--- !u!114 &95815136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114150766545849260, guid: a96fbcbdfcde44b0eab872df0a83752c,
+    type: 2}
+  m_PrefabInternal: {fileID: 815897223}
+  m_Script: {fileID: 11500000, guid: 1cd1a4405c0ed4c10a4e5cdbad01d7d4, type: 3}
 --- !u!1 &118939934
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +998,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1105458645543194, guid: e7b2a8256ba5a45eebf0eabde8cff2db,
     type: 2}
   m_PrefabInternal: {fileID: 332111641}
+--- !u!114 &597786541 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114363755659443756, guid: e7b2a8256ba5a45eebf0eabde8cff2db,
+    type: 2}
+  m_PrefabInternal: {fileID: 332111641}
+  m_Script: {fileID: 11500000, guid: 9e7169c6b11cb40ccbac3e06c4b773de, type: 3}
 --- !u!1 &730033508
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,10 +1686,8 @@ MonoBehaviour:
   charaName: {fileID: 114187063703034832, guid: 3da4abfb0fa1f492a91a8d7d254d5753,
     type: 2}
   charaSex: {fileID: 114993209473790704, guid: 8138350263792498bb068a475b23eb77, type: 2}
-  createButtom: {fileID: 114150766545849260, guid: a96fbcbdfcde44b0eab872df0a83752c,
-    type: 2}
-  canselButtom: {fileID: 114363755659443756, guid: e7b2a8256ba5a45eebf0eabde8cff2db,
-    type: 2}
+  createButton: {fileID: 95815136}
+  canselButton: {fileID: 597786541}
   m_characterNameField: {fileID: 559160433}
   m_characterSexField: {fileID: 343505884}
 --- !u!1 &1179161218
