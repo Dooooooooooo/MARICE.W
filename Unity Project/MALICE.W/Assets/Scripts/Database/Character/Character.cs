@@ -12,6 +12,7 @@ using MW.UI;
 [Serializable]
 public class Character
 {
+    public  const int    MAX_FILECOUNT        = 10;
     private const string PATH_TO_DB_JSONFILES = "/Prefabs/Database/Jsonfiles/chara_data_";
 
     //JSONに書き出されるフィールド
@@ -20,7 +21,7 @@ public class Character
     [SerializeField] string m_SEX;
     [SerializeField] int m_HIGHSCORE;
     [SerializeField] int m_PLAYTIME;
-      
+    
 
     /* ゲッター・セッター？ */
     public int getID() {

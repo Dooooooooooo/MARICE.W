@@ -94,7 +94,7 @@ namespace MW.UI {
         private void ReloadCharacterTable() {
             _characters = new List<Character>();
 
-            for (int i = 1; i <= 10; i++) { //ファイル数によって最大値を変更
+            for (int i = 1; i <= Character.MAX_FILECOUNT; i++) { //ファイル数によって最大値を変更
                 Character chara = Character.ReadFrom(i);
                 if (chara.getNAME() != "") _characters.Add(chara);
             }
