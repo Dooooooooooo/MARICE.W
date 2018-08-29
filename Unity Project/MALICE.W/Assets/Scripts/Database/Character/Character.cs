@@ -12,7 +12,7 @@ using MW.UI;
 [Serializable]
 public class Character
 {
-    public  const int    MAX_FILECOUNT        = 10;
+    public  const int    MAX_FILECOUNT        = 50;
     private const string PATH_TO_DB_JSONFILES = "/Prefabs/Database/Jsonfiles/chara_data_";
 
     //JSONに書き出されるフィールド
