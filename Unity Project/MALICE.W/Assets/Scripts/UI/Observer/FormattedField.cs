@@ -34,18 +34,19 @@ namespace MW.UI {
             _needsUpdate = true;
         }
 
-        //Unityのインターフェイス
-        void Start() {
-        }
-
         void Update() {
-            if(_needsUpdate) {
-                if(_receiver == null)
-                    throw new NullReferenceException("Receiver is not set.");
-                
-                this.GetComponent<Text>().text = _formatter(_receiver());
-                _needsUpdate = false;
-            }
+            //アップデートが不要なら関数から抜ける
+            if (!_needsUpdate) return;
+            
+            //レジーバーが設定されてないならエラーを吐く
+            if(_receiver == null)
+                throw new NullReferenceException("Receiver is not set.");
+            
+            //フォーマッターに従ってフィールドの中身を入れ替える
+            this.GetComponent<Text>().text = _formatter(_receiver());
+            
+            //アップデートのフラグを外す
+            _needsUpdate = false;
         }
     }
 }

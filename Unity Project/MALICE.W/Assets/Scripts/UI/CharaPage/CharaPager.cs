@@ -3,12 +3,12 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using MW.UI.ListExtension;
+using MW.UI.Extensions;
 
 namespace MW.UI {
     class CharaPager : IObservable<UpdateObservant<CharaPager>> {
         //定数
-        public const int CHARACTER_PER_PAGE = 6;
+        public const int CHARACTER_PER_PAGE    = 6;
 
         //キャラファイル数
         public const int CHARACTER_FILE_NUMBER = 50;
@@ -119,7 +119,7 @@ namespace MW.UI {
         }
 
         private List<Character> GetCharacterOnCurrentPage() {
-            return _characters.SpliceND(_currentPage * CHARACTER_PER_PAGE,
+            return _characters.SpliceNd(_currentPage * CHARACTER_PER_PAGE,
                                         CHARACTER_PER_PAGE);
         }
     };

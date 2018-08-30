@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MW.UI.ListExtension {
+namespace MW.UI.Extensions {
     /// <summary>
     /// リスト操作を簡単に（そしてJavaScript風に）行うための<c>List</c>への拡張
     /// </summary>
@@ -30,30 +30,57 @@ namespace MW.UI.ListExtension {
         /// </summary>
         /// <param name="index">操作の開始位置</param>
         /// <param name="count">取り出す個数</param>
-        public static List<T> SpliceND<T>(this List<T> self, int index, int count) {
+        public static List<T> SpliceNd<T>(this List<T> self, int index, int count) {
             int length = self.Count;
             if((index + count) < length) return self.GetRange(index, count);
             else                         return self.GetRange(index, length - index);
         }
-
-        public static List<U> Map<T, U>(this List<T> self, Func<T, U> f) {
+        
+        /// <summary>
+        /// IEnumerable<T>.Selectの結果をList<T>に変換する。Array.prototype.mapに相当
+        /// </summary>
+        /// <param name="f">適用する関数</param>
+        public static List<U> Map<T, U>(this IEnumerable<T> self, Func<T, U> f) {
             return self.Select(f).ToList();
         }
-
-        public static List<T> Filter<T>(this List<T> self, Func<T, bool> f) {
+        
+        /// <summary>
+        /// IEnumerable<T>.Whereの結果をList<T>に変換する。Array.prototype.filterに相当
+        /// </summary>
+        /// <param name="f">フィルターする関数</param>
+        public static List<T> Filter<T>(this IEnumerable<T> self, Func<T, bool> f) {
             return self.Where(f).ToList();
         }
-
-        public static T Reduce<T>(this List<T> self, Func<T, T, T> f) {
-            return self.Aggregate(f);
-        }
-
+        
+        /// <summary>
+        /// リストを走査して、単一の値にする。
+        /// </summary>
+        /// <param name="firstValue"></param>
+        /// <param name="f">reduceに用いる関数</param>
         public static U Reduce<T, U>(this List<T> self, U firstValue, Func<T, U, U> f) {
-            U _val = firstValue;
+            U outVal = firstValue;
 
             for(int i = 0;i < self.Count; i++)
-                _val = f(self[i], _val);
+                outVal = f(self[i], outVal);
 
-            return _val;
+            return outVal;
+        }
+        
+        /// <summary>
+        /// 指定された要素が存在するとき、その要素を取り除く。
+        /// </summary>
+        /// <param name="item">要素</param>
+        public static void RemoveIfAvailable<T>(this List<T> self, T item) {
+            if (self.Contains(item)) self.Remove(item);
+        }
+        
+        /// <summary>
+        /// index番目の要素を取り出す。取り出された要素はリストから外される。
+        /// </summary>
+        /// <param name="index">インデックス</param>
+        public static T TakeAt<T>(this List<T> self, int index) {
+            var t = self[index];
+            self.RemoveAt(index);
+            return t;
         }
 }}
