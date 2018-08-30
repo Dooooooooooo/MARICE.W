@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MW.UI.ListExtension;
 
 namespace MW.UI {
     class CharaPager : IObservable<UpdateObservant<CharaPager>> {
@@ -52,10 +53,16 @@ namespace MW.UI {
             }
         }
 
-        public UpdateObservant<CharaPager> Observe() {
-            return _pagerObserver;
+        public T Observe<T>() where T : IObservantBase {
+            if(default(T) is UpdateObservant<CharaPager>)
+                return (T)(object)_pagerObserver;
+            else
+                return default(T);
         }
 
+        public UpdateObservant<CharaPager> ObserveUpdate() {
+            return _pagerObserver;
+        }
 
         public void NextPage() {
             _currentPage++;
@@ -97,7 +104,7 @@ namespace MW.UI {
         private void ReloadCharacterTable() {
             _characters = new List<Character>();
 
-            for (int i = 1; i <= Character.MAX_FILECOUNT; i++) { //ファイル数によって最大値を変更
+            for (var i = 1; i <= Character.MAX_FILECOUNT; i++) { //ファイル数によって最大値を変更
                 Character chara = Character.ReadFrom(i);
                 if (chara.getNAME() != "") _characters.Add(chara);
             }

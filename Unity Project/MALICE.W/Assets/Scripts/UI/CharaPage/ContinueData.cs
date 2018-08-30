@@ -66,7 +66,7 @@ public class ContinueData : MonoBehaviour
         //pager.currentPageNumber = 0;
 
         //ページャーが更新されたらPagerUpatedが読まれるようにする
-        pager.Observe()
+        pager.ObserveUpdate()
              .Attach(PagerUpdated);
 
         //キャラクターリストを描画
@@ -78,7 +78,7 @@ public class ContinueData : MonoBehaviour
         var pager = CharaPager.instance;
         
         //ページャーのイベントリスナーを外すよ
-        pager.Observe().Deattach(PagerUpdated);
+        pager.ObserveUpdate().Deattach(PagerUpdated);
     }
 
     void SetVisibilityOfButtons(bool prev, bool next) {

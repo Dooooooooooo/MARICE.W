@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MW.UI {
+namespace MW.UI.ListExtension {
     /// <summary>
     /// リスト操作を簡単に（そしてJavaScript風に）行うための<c>List</c>への拡張
     /// </summary>
@@ -46,5 +46,14 @@ namespace MW.UI {
 
         public static T Reduce<T>(this List<T> self, Func<T, T, T> f) {
             return self.Aggregate(f);
+        }
+
+        public static U Reduce<T, U>(this List<T> self, U firstValue, Func<T, U, U> f) {
+            U _val = firstValue;
+
+            for(int i = 0;i < self.Count; i++)
+                _val = f(self[i], _val);
+
+            return _val;
         }
 }}

@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace MW.UI {
-    public interface IObservable<T> 
+    public interface IObservableBase {
+        T Observe<T>() where T : IObservantBase;
+    };
+
+    public interface IObservable<T> : IObservableBase
         where T : IObservantBase {
-        T Observe();
-    }
+    };
 
     public interface IObserverBase {}
     public interface IObserver<_Observant> : IObserverBase
@@ -15,11 +18,11 @@ namespace MW.UI {
     }
 
     public interface IObservantBase {
-        void Fire();
     }
     
     public interface IObservant<_Observer> : IObservantBase
         where _Observer : IObserverBase {
+        void Fire();
         void Subscribe(_Observer observer);
         void Unsubscribe(_Observer observer);
     }
