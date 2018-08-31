@@ -37,7 +37,8 @@ namespace MW.Database.Inventory {
             return m_ThrowingWeapons.TakeAt(index);
         }
         
-        //
+        //アンアサイン用のメソッド（おそらく不要、または過剰）
+        // TODO Inventory::Add*()呼び出し側の管理を徹底。
         private void UnassignIfAvailable(GameObject weapon) {
             m_MainWeapons.Remove(weapon);
             m_SubWeapons.Remove(weapon);

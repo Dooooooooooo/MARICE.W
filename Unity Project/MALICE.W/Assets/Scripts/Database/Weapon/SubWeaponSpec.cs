@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace MW.Database.Weapon {
     public class SubWeaponSpec : WeaponSpecBase {
         private int   m_MaxLoadedBulletsCount = 0;

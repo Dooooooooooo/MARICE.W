@@ -4,6 +4,6 @@ namespace MW.Database.Character.Parameter
 {
     public abstract class ParameterBase
     {
-        private string m_ParameterName;
+        private string m_ParameterName = "";
     }
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace MW.Database.Character {
+namespace MW.Database.Character.State {
     public class State {
         private string     m_StateName          = "";
         private bool       m_HasDuration        = false;

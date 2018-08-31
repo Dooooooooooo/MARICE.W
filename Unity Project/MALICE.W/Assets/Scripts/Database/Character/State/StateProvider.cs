@@ -5,7 +5,7 @@ using UniRx;
 
 using MW.UI.Extensions;
 
-namespace MW.Database.Character
+namespace MW.Database.Character.State
 {
     /// <summary>
     /// キャラクターの状態（State）を管理するクラス。
@@ -17,7 +17,7 @@ namespace MW.Database.Character
         private readonly List<IObserver<State>> m_Observers;
         
         /// <summary>
-        /// StateProviderのコンストラクタ。空の状態リストにて初期化される。
+        /// StateProviderのコンストラクタ。空の状態にて初期化される。
         /// </summary>
         public StateProvider() {
             m_States = new List<State>();
@@ -73,7 +73,7 @@ namespace MW.Database.Character
             
             if(m_States.All(s => s.StateName != stateName)) { //同一名称のStateがなければ
                 m_States.Add(state); //追加する
-            } else { //無いときには
+            } else { //既にあるときには
                 //例外を出す
                 Exception e = new ArgumentException("Item with same key '" + stateName + "' has already been added.");
                 NotifyError(e);

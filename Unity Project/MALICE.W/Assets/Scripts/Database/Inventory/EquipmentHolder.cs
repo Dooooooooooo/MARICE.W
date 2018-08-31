@@ -1,6 +1,5 @@
 using UnityEngine;
 using MW.System.Character.PlayerCharacter.Behaviour.AttackStrategy;
-using NotImplementedException = System.NotImplementedException;
 
 namespace MW.Database.Inventory {
     public class EquipmentHolder : IEquipmentInfo {
