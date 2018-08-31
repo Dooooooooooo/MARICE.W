@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-using MW.UI.Extensions;
+using MW.Extensions;
 using UniRx;
 
 namespace MW.UI {

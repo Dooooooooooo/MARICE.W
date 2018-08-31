@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using MW.UI.Extensions;
+using MW.Extensions;
 
 namespace MW.Database.Inventory {
     public class Inventory {

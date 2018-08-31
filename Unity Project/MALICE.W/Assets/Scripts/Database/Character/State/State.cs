@@ -14,13 +14,15 @@ namespace MW.Database.Character.State {
             get { return m_StateName; }
         }
 
-        public void UpdateDuration() { //なぜprivate?
+        private void UpdateDuration() {
         }
 
-        public void RunCallbackEvent() { //なぜprivate?
+        private void RunCallbackEvent() {
+            //m_CallbackEventを発火する
+            m_CallbackEvent?.Invoke();
         }
 
-        public void Start() { //なぜprivate?
+        private void Start() {
         }
     };
 };

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MW.UI.Extensions {
+namespace MW.Extensions {
     /// <summary>
     /// リスト操作を簡単に行うための<c>List</c>への拡張
     /// </summary>
@@ -24,6 +24,7 @@ namespace MW.UI.Extensions {
             self.RemoveRange(index, count);
             return res;
         }
+        
         /// <summary>
         /// JavaScriptのArray.prototype.spliceの非破壊版。
         /// リストの<c>index</c>番目から<c>count</c>までを非破壊的に取り出す。
@@ -75,4 +76,5 @@ namespace MW.UI.Extensions {
             self.RemoveAt(index);
             return t;
         }
-}}
+    }
+}

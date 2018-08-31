@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 
-using MW.UI.Extensions;
+using MW.Extensions;
 
 namespace MW.Database.Character.State
 {

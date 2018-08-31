@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UniRx;
 
-namespace MW.UI.Extensions {
+namespace MW.Extensions {
     public class Unsubscriber<T> : IDisposable {
         private readonly List<IObserver<T>> m_Observers;
         private readonly IObserver<T>       m_Target;
@@ -13,11 +13,15 @@ namespace MW.UI.Extensions {
             m_Target    = target;
         }
         public void Dispose() {
+            //既に破棄されている場合は、やめる
             if(m_Disposed) return;
-
+            
+            //他のスレッドで操作できないようにしてから、削除
             lock(m_Observers) {
                 m_Observers.Remove(m_Target);
             }
+            //破棄されているというフラグを入れる
+            m_Disposed = true;
         }
     };
 };
