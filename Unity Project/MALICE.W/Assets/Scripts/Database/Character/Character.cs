@@ -1,11 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 using System;
-using MW.UI;
 
 //Character（CreateData.csより分離。）
 
@@ -16,11 +11,11 @@ public class Character
     private const string PATH_TO_DB_JSONFILES = "/Prefabs/Database/Jsonfiles/chara_data_";
 
     //JSONに書き出されるフィールド
-    [SerializeField] int m_ID;
+    [SerializeField] int    m_ID;
     [SerializeField] string m_NAME;
     [SerializeField] string m_SEX;
-    [SerializeField] int m_HIGHSCORE;
-    [SerializeField] int m_PLAYTIME;
+    [SerializeField] int    m_HIGHSCORE;
+    [SerializeField] int    m_PLAYTIME;
     
 
     /* ゲッター・セッター？ */

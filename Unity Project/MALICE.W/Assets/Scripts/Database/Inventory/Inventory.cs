@@ -39,9 +39,9 @@ namespace MW.Database.Inventory {
         
         //
         private void UnassignIfAvailable(GameObject weapon) {
-            m_MainWeapons.RemoveIfAvailable(weapon);
-            m_SubWeapons.RemoveIfAvailable(weapon);
-            m_ThrowingWeapons.RemoveIfAvailable(weapon);
+            m_MainWeapons.Remove(weapon);
+            m_SubWeapons.Remove(weapon);
+            m_ThrowingWeapons.Remove(weapon);
         }
     };
 };

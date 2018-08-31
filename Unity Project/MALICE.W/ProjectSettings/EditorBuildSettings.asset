@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Before Scenes/Continue.unity
     guid: 933ac5c7ee9c743aa82c1b04bc13168c
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Before Scenes/Alternative_game.unity
     guid: b07c587038ee84580aab33252befc56d
@@ -29,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Before Scenes/Title.unity
     guid: 0a942fda7a525453d9994ac525a1fddd
+  - enabled: 1
+    path: Assets/Scenes/Before Scenes/Create.unity
+    guid: 6e38c36ede65b1247843310fedcf92b0
   m_configObjects: {}

@@ -67,14 +67,6 @@ namespace MW.UI.Extensions {
         }
         
         /// <summary>
-        /// 指定された要素が存在するとき、その要素を取り除く。
-        /// </summary>
-        /// <param name="item">要素</param>
-        public static void RemoveIfAvailable<T>(this List<T> self, T item) {
-            self.Remove(item);
-        }
-        
-        /// <summary>
         /// index番目の要素を取り出す。取り出された要素はリストから外される。
         /// </summary>
         /// <param name="index">インデックス</param>

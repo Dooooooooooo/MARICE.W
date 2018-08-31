@@ -10,9 +10,8 @@ public class CharaPagePrevious : MonoBehaviour
 
     public int CharaPagePreviousNum = 0;
 
-    public void onClick()
-    {
-        CharaPager.instance.PrevPage();
+    public void onClick() {
+        CharaPager.Instance.PrevPage();
     }
 
 }

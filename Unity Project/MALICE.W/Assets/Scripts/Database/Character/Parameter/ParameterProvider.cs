@@ -1,15 +1,15 @@
 namespace MW.Database.Character.Parameter
 {
     public class ParameterProvider {
-        PointParameter Health() {
+        private PointParameter Health() {
             return null;
         }
         
-        PointParameter NaturalHealingPower() {
+        private PointParameter NaturalHealingPower() {
             return null;
         }
         
-        PointParameter KillPoint() {
+        private PointParameter KillPoint() {
             return null;
         }
     }
