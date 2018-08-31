@@ -36,8 +36,6 @@ public class ContinueData : MonoBehaviour
     private CharaPagePrevious charaPagePrevious;
     private NowPage nowPage;
 
-    private Action<CharaPager> _pagerUpdated;
-
     void Start()
     {
         //FoundationオブジェクトからGameObject類を取得する

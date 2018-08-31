@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MW.UI.Extensions {
     /// <summary>
-    /// リスト操作を簡単に（そしてJavaScript風に）行うための<c>List</c>への拡張
+    /// リスト操作を簡単に行うための<c>List</c>への拡張
     /// </summary>
     public static class ListExtension {
         /// <summary>
@@ -71,7 +71,7 @@ namespace MW.UI.Extensions {
         /// </summary>
         /// <param name="item">要素</param>
         public static void RemoveIfAvailable<T>(this List<T> self, T item) {
-            if (self.Contains(item)) self.Remove(item);
+            self.Remove(item);
         }
         
         /// <summary>

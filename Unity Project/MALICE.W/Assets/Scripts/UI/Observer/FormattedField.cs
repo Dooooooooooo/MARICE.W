@@ -5,7 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace MW.UI {
-    public class FormattedField<T> : MonoBehaviour, IUpdateObserver<T> {
+    /// <summary>
+    /// recieverから得た値をformatterに従って表示します。
+    /// UnityはジェネリックなMonoBehaviourに対応していないので、継承してからスクリプトとしてアサインするように。
+    /// </summary>
+
+    // TODO ジェネリックなMonoBehaviourとUniRxは相性が悪いので、いずれは廃止したい。IObservable.csもその遺物。
+
+    public class FormattedField<T> : MonoBehaviour {
         UpdateObservant<T>  _observable        = null;
         Func<T>             _receiver          = null;
 
@@ -18,22 +25,14 @@ namespace MW.UI {
             return this;
         }
 
-        public FormattedField<T> Bind(UpdateObservant<T> observable) {
-            _observable = observable;
-            _receiver   = () => _observable.GetValue();
-            observable.Subscribe(this);
-            return this;
-        }
-
         public FormattedField<T> WithFormat(Func<T, string> formatter) {
             _formatter = formatter;
             return this;
         }
 
-        public void Handle(UpdateObservant<T> _) {
+        public void RequestUpdate() {
             _needsUpdate = true;
         }
-
         void Update() {
             //アップデートが不要なら関数から抜ける
             if (!_needsUpdate) return;

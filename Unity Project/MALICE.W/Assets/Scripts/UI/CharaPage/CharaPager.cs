@@ -3,10 +3,11 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using MW.UI.Extensions;
 
 namespace MW.UI {
-    class CharaPager : IObservable<UpdateObservant<CharaPager>> {
+    class CharaPager {
         //定数
         public const int CHARACTER_PER_PAGE    = 6;
 
@@ -53,7 +54,7 @@ namespace MW.UI {
             }
         }
 
-        public T Observe<T>() where T : IObservantBase {
+        public T Observe<T>() {
             if(default(T) is UpdateObservant<CharaPager>)
                 return (T)(object)_pagerObserver;
             else
