@@ -10,13 +10,13 @@ public class CharacterField : MonoBehaviour, IObserver<Character> {
     private bool                m_NeedsUpdate       = false;
     
     public CharacterField Bind(Func<Character> receiver) {
-        if(m_Unsubscriber != null) m_Unsubscriber.Dispose();
+        m_Unsubscriber?.Dispose();
         m_Receiver   = receiver;
         return this;
     }
 
     public CharacterField Bind(IObservable<Character> observable) {
-        if(m_Unsubscriber != null) m_Unsubscriber.Dispose();
+        m_Unsubscriber?.Dispose();
         m_Unsubscriber = observable.Subscribe(this);
         return this;
     }

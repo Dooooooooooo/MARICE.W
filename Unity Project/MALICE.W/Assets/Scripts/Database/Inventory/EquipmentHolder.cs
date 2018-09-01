@@ -19,6 +19,7 @@ namespace MW.Database.Inventory {
             return m_ThrowingWeapon;
         }
         
+        // TODO 武器のアサイン・アンアサイン処理
         void AssignMainWeapon(GameObject weapon) {
             UnassignMainWeapon();
             m_MainWeapon = weapon;
@@ -33,7 +34,7 @@ namespace MW.Database.Inventory {
             UnassignThrowingWeapon();
             m_ThrowingWeapon = weapon;
         }
-
+        
         void UnassignMainWeapon() {}
         void UnassignSubWeapon() {}
         void UnassignThrowingWeapon() {}

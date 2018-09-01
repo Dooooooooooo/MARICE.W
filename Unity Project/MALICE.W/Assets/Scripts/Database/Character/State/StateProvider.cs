@@ -10,56 +10,67 @@ namespace MW.Database.Character.State
     /// <summary>
     /// キャラクターの状態（State）を管理するクラス。
     /// </summary>
-    class StateProvider : IObservable<State> {
+    public class StateProvider {
         //Stateを格納するリスト。
-        private readonly List<State>            m_States;
-        //IObserver<State>を格納するリスト。
-        private readonly List<IObserver<State>> m_Observers;
+        private readonly List<State>                     m_States;
+        
+        private readonly Subject<StateChange>            m_StateChangeObservers;
+        private readonly Subject<StateChange>            m_NewStateObservers;
+        private readonly Dictionary<string, IDisposable> m_Disposer;
+        
+        
+        public List<State> States => m_States;
         
         /// <summary>
         /// StateProviderのコンストラクタ。空の状態にて初期化される。
         /// </summary>
         public StateProvider() {
-            m_States = new List<State>();
-            m_Observers = new List<IObserver<State>>();
+            m_States               = new List<State>();
+            
+            m_StateChangeObservers = new Subject<StateChange>();
+            m_NewStateObservers    = new Subject<StateChange>();
         }
         
-        /* IObservable<T>の実装 */
-        
-        /// <summary>
-        /// オブザーバーを購読することができる。IObservableのメソッド。
-        /// </summary>
-        /// <param name="observer"></param>
-        /// <returns>IDisposableオブジェクト。Dispose()にて購読を解除できる。</returns>
-        public IDisposable Subscribe(IObserver<State> observer) {
-            m_Observers.Add(observer);
-            return new Unsubscriber<State>(observer, m_Observers);
-        }
-        
-        /* IObserver<State>への通知メソッド */
+        /* IObserver<StateChange>への通知メソッド */
         
         /// <summary>
         /// オブザーバーに状態の変更を通知する。
         /// </summary>
-        /// <param name="state">加わった状態</param>
-        private void NotifyUpdate(State state) {
-            lock(m_Observers) { //m_ObserversがUnsubscriberによって操作されているかもしれないので
-                m_Observers.ForEach(observer => {
-                    observer.OnNext(state);
-                });
-            }
+        /// <param name="state">変更された状態</param>
+        private void NotifyChange(State state) {
+            m_StateChangeObservers.OnNext(new StateChange {
+                State    = state,
+                Provider = this
+            });
         }
         
         /// <summary>
-        /// オブザーバーにエラーを通知する。
+        /// オブザーバーに状態の追加を通知する。
         /// </summary>
-        /// <param name="e">例外</param>
-        private void NotifyError(Exception e) {
-            lock(m_Observers) { //m_ObserversがUnsubscriberによって操作されているかもしれないので
-                m_Observers.ForEach(observer => {
-                    observer.OnError(e);
-                });
-            }
+        /// <param name="state">追加された状態</param>
+        private void NotifyNew(State state) {
+            m_NewStateObservers.OnNext(new StateChange {
+                State    = state,
+                Provider = this
+            });
+        }
+        
+        /* IObservable<StateChange>を返すメソッド */
+        
+        /// <summary>
+        /// 状態の追加をIObservable<StateChange>としてObserveする。
+        /// </summary>
+        /// <param name="state">追加された状態</param>
+        public IObservable<StateChange> NewStateAsObservable() {
+            return m_NewStateObservers.AsObservable();
+        }
+        
+        /// <summary>
+        /// 状態の変更をIObservable<StateChange>としてObserveする。
+        /// </summary>
+        /// <param name="state">追加された状態</param>
+        public IObservable<StateChange> StateChangeAsObservable() {
+            return m_StateChangeObservers.AsObservable();
         }
         
         /* クラス図に沿った実装 */
@@ -73,15 +84,18 @@ namespace MW.Database.Character.State
             
             if(m_States.All(s => s.StateName != stateName)) { //同一名称のStateがなければ
                 m_States.Add(state); //追加する
+                
+                //Stateの変更通知を受け取れるようにする
+                m_Disposer[stateName] = state.AsObservable()
+                                             .Subscribe(NotifyChange);
+            
+                //新たなStateが追加されたことを通知
+                NotifyNew(state);
             } else { //既にあるときには
                 //例外を出す
                 Exception e = new ArgumentException("Item with same key '" + stateName + "' has already been added.");
-                NotifyError(e);
                 throw e;
             }
-
-            //新たなStateが追加されたことを通知
-            NotifyUpdate(state);
         }
 
         /// <summary>
@@ -89,7 +103,15 @@ namespace MW.Database.Character.State
         /// </summary>
         /// <param name="stateName">状態の名前</param>
         public bool DeleteState(string stateName) {
-            return m_States.RemoveAll(s => s.StateName == stateName) > 0;
+            return m_States.RemoveAll(s => {
+                if (s.StateName == stateName) {
+                    m_Disposer[stateName].Dispose();
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }) > 0;
         }
 
         /// <summary>

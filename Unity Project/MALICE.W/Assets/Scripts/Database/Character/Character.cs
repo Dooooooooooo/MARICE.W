@@ -29,6 +29,7 @@ public class Character
     public string getNAME(){
         return m_NAME;
     }
+    
     public void setNAME(string name){
         this.m_NAME = name;
     }

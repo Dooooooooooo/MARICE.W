@@ -1,9 +1,9 @@
 using System;
+using MW.Extensions;
+using UniRx;
 
 namespace MW.Database.GameEvent {
-    public class ConcreteGameEvent : IGameEventBase {
-        public void Execute() {
-            throw new NotImplementedException();
-        }
+    public class ConcreteGameEvent {
+        public void Execute() {}
     }
 }

@@ -77,7 +77,7 @@ public class ContinueData : MonoBehaviour
         var pager = CharaPager.Instance;
         
         //ページャーのイベントリスナーを外すよ
-        if(m_Unsubscriber != null) m_Unsubscriber.Dispose();
+        m_Unsubscriber?.Dispose();
     }
 
     void SetVisibilityOfButtons(bool prev, bool next) {
