@@ -70,6 +70,6 @@ public class CharacterField : MonoBehaviour, IObserver<Character> {
     }
 
     public void OnNext(Character value) {
-        m_NeedsUpdate = true;
+        RequestUpdate();
     }
 }

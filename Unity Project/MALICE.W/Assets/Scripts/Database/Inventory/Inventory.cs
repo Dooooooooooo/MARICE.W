@@ -4,9 +4,9 @@ using MW.Extensions;
 
 namespace MW.Database.Inventory {
     public class Inventory {
-        private List<GameObject> m_MainWeapons     = new List<GameObject>();
-        private List<GameObject> m_SubWeapons      = new List<GameObject>();
-        private List<GameObject> m_ThrowingWeapons = new List<GameObject>();
+        private readonly List<GameObject> m_MainWeapons     = new List<GameObject>();
+        private readonly List<GameObject> m_SubWeapons      = new List<GameObject>();
+        private readonly List<GameObject> m_ThrowingWeapons = new List<GameObject>();
         
         //追加用メソッド
         public void AddMainWeapon(GameObject weapon) {
