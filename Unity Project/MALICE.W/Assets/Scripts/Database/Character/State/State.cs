@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,7 +7,7 @@ using UnityEngine.Events;
 namespace MW.Database.Character.State {
     public class State : IObservable<State> {
         /* クラス図より・メンバ変数 */
-        private string         m_StateName          = "";
+        private string         m_StateName          = null;
         private bool           m_HasDuration        = false;
         private float          m_Duration           = 0.0f;
         private float          m_RemainingDuration  = 0.0f;
@@ -16,7 +17,18 @@ namespace MW.Database.Character.State {
         private bool           m_IsActive           = false;
         
         public string StateName {
-            get { return m_StateName; }
+            get {
+                if (m_StateName == null)
+                    throw new NullReferenceException("MW.Database.Character.State name has not been set.");
+                
+                return m_StateName;
+            }
+            set {
+                if (m_StateName == null)
+                    m_StateName = value;
+                else
+                    throw new InvalidOperationException("MW.Database.Character.State may not be renamed.");
+            }
         }
 
         public bool HasDuration {
@@ -31,7 +43,11 @@ namespace MW.Database.Character.State {
         
         public float RemainingDuration {
             get { return m_RemainingDuration; }
-            set { m_RemainingDuration = value; NotifyUpdate(); }
+            set {
+                m_RemainingDuration = value;
+                m_IsActive          = IsDurationValid(); //m_RemainingDurationが有効なら活性化する
+                NotifyUpdate();
+            }
         }
         
         public UnityEvent CallbackEvent {
@@ -57,15 +73,27 @@ namespace MW.Database.Character.State {
             return m_StateChanged.AsObservable();
         }
         
+        /* こまごまとしたサブルーチン */
+        
+        private bool IsDurationValid() {
+            //1フレーム以下なら非アクティブにする
+            return Math.Abs(m_RemainingDuration) > (1 / 60.0);
+        }
+        
         /* クラス図の記載による */
 
         private void UpdateDuration() {
-            if (!HasDuration || !m_IsActive) return;
+            if (!m_HasDuration || !m_IsActive)
+                return;
 
-            //残り時間を計算して、1フレーム以下なら非アクティブにする
+            //残り時間を計算して、m_RemainingDurationが有効かどうか調べる
             m_RemainingDuration = Math.Max(0, m_RemainingDuration - Time.deltaTime);
-            m_IsActive = Math.Abs(m_RemainingDuration) > (1 / 60.0);
-
+            m_IsActive = IsDurationValid();
+            
+            //無効になったら、m_RemainingDurationを0にする
+            if(!m_IsActive)
+                m_RemainingDuration = 0;
+            
             //更新を知らせる
             NotifyUpdate();
         }
