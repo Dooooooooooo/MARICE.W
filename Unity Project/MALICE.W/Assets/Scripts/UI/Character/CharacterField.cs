@@ -4,10 +4,11 @@ using System;
 using UniRx;
 
 public class CharacterField : MonoBehaviour, IObserver<Character> {
-    Func<Character>             m_Receiver          = null;
-    Func<Character, string>     m_Formatter         = _ => "(empty)";
-    private IDisposable         m_Unsubscriber = null;
-    private bool                m_NeedsUpdate       = false;
+    Func<Character>             m_Receiver;
+    Func<Character, string>     m_Formatter = _ => "(empty)";
+    private IDisposable         m_Unsubscriber;
+    private bool                m_NeedsUpdate;
+    private Text                m_TextField;
     
     public CharacterField Bind(Func<Character> receiver) {
         m_Unsubscriber?.Dispose();
@@ -28,7 +29,20 @@ public class CharacterField : MonoBehaviour, IObserver<Character> {
     
     public void RequestUpdate() {
         m_NeedsUpdate = true;
+        
+        //強制更新をかけてみる
+        Update();
     }
+    
+    public void RequestLazyUpdate() {
+        m_NeedsUpdate = true;
+    }
+
+    void Start() {
+        //既に取ってきていると楽なのでは？
+        m_TextField = this.GetComponent<Text>();
+    }
+    
     void Update() {
         //アップデートが不要なら関数から抜ける
         if (!m_NeedsUpdate) return;
@@ -38,10 +52,12 @@ public class CharacterField : MonoBehaviour, IObserver<Character> {
             throw new NullReferenceException("Receiver is not set.");
         
         //フォーマッターに従ってフィールドの中身を入れ替える
-        this.GetComponent<Text>().text = m_Formatter(m_Receiver());
-        
-        //アップデートのフラグを外す
-        m_NeedsUpdate = false;
+        if (m_TextField != null) {
+            m_TextField.text = m_Formatter(m_Receiver());
+            
+            //入れ替えに成功したら、アップデートのフラグを外す
+            m_NeedsUpdate = false;
+        }
     }
 
     public void OnCompleted() {
