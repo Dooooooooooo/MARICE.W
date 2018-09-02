@@ -20,10 +20,20 @@ namespace MW.Database.Character.Parameter
 
         public int Min {
             get { return m_Min; }
+            set {
+                //min <= Maxになるように値を代入
+                m_Min = value;
+                if (m_Max < m_Min) m_Max = m_Min;
+            }
         }
 
         public int Max {
             get { return m_Max; }
+            set {
+                //min <= Maxになるように値を代入
+                m_Max = value;
+                if (m_Max < m_Min) m_Min = m_Max;
+            }
         }
 
         private void SetValue(int value) {
@@ -37,11 +47,7 @@ namespace MW.Database.Character.Parameter
         
         public void SafetyIncrease(int point) {
             //インクリメントした値を算出
-            int value = m_Value + point;
-
-            //範囲内なら上書き
-            if (m_Min <= value && value <= m_Max)
-                m_Value = value;
+            SetValue(m_Value + point);
         }
 
         public void SafetyDecrease(int point) {

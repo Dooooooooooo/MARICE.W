@@ -8,7 +8,7 @@ namespace MW.Database.Weapon {
         private readonly GameObject      m_GameObj;
         private          EquipmentHolder m_EquippedBy;
         
-        public WeaponSpecBase WeaponSpec => m_WeaponSpec;
+        public WeaponSpecBase Spec       => m_WeaponSpec;
         public GameObject     GameObject => m_GameObj;
 
         public bool IsEquipped { get; private set; }
@@ -17,6 +17,14 @@ namespace MW.Database.Weapon {
                       GameObject correspondingGameObject) {
             m_WeaponSpec = weaponSpecification;
             m_GameObj    = correspondingGameObject;
+        }
+
+        public string TypeOfWeapon() {
+            if (Spec is MainWeaponSpec)          return "Main";
+            else if (Spec is SubWeaponSpec)      return "Sub";
+            else if (Spec is ThrowingWeaponSpec) return "Throwing";
+            else
+                throw new NotSupportedException("This type of weapon spec is not supported.");
         }
         
         /* GameObjectへの暗黙による型変換 */

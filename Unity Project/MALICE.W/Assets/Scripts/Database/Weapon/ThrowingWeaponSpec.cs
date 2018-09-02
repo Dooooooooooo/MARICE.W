@@ -1,5 +1,5 @@
 namespace MW.Database.Weapon {
-    public class ThrowingWeaponSpec {
+    public class ThrowingWeaponSpec : WeaponSpecBase {
         private int m_ItemCount      = 0;
         private int m_MaxItemCount   = 0;
         private int m_Firepower      = 0;
