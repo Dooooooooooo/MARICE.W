@@ -1,10 +1,10 @@
-using System;
-using System.Configuration;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 namespace MW.Database.Character.State {
+    using Time = UnityEngine.Time;
+    
     public class State : IObservable<State> {
         /* クラス図より・メンバ変数 */
         private string         m_StateName          = null;
