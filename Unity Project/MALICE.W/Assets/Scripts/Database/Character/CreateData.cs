@@ -29,8 +29,7 @@ public class CreateData : MonoBehaviour
     //Character chara = new Character();
 
     //さすがに複数扱うことはないでしょう...
-    public static UpdateObservant<Character> character
-        = new UpdateObservant<Character>(new Character());
+    public static Character character;
 
     void Start()
     {
@@ -38,11 +37,11 @@ public class CreateData : MonoBehaviour
         NameField = GetComponent<InputField>();
 
         m_characterNameField.GetComponent<CharacterField>()
-                            .Bind(character)
+                            .Bind(() => character)
                             .WithFormat(c => c.getNAME());
         
         m_characterSexField.GetComponent<CharacterField>()
-                           .Bind(character)
+                           .Bind(() => character)
                            .WithFormat(c => c.getSEX());
     }
 
@@ -107,8 +106,12 @@ public class CreateData : MonoBehaviour
             break; //ファイルが書き込めたら終了
         }
 
-        character.SetValue(chara); //作製したキャラクターを外から見えるようにする
-        
+        character = chara; //作製したキャラクターを外から見えるようにする
+        m_characterNameField.GetComponent<CharacterField>()
+                            .RequestUpdate();
+        m_characterSexField .GetComponent<CharacterField>()
+                            .RequestUpdate();
+
         createButton.GetComponent<CreateButton>().num = chara.getID();
         canselButton.GetComponent<CanselButton>().num = chara.getID();
 

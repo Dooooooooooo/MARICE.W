@@ -13,7 +13,7 @@ public class CharaPageNext : MonoBehaviour {
 
     public void onClick()
     {
-        CharaPager.instance.NextPage();
+        CharaPager.Instance.NextPage();
     }
 
 }

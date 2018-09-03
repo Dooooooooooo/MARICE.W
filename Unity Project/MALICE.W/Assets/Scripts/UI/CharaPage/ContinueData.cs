@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MW.UI;
+using UniRx;
 
 public class ContinueData : MonoBehaviour
 {
@@ -36,10 +37,9 @@ public class ContinueData : MonoBehaviour
     private CharaPagePrevious charaPagePrevious;
     private NowPage nowPage;
 
-    private Action<CharaPager> _pagerUpdated;
-
-    void Start()
-    {
+    private IDisposable m_Unsubscriber;
+    
+    void Start() {
         //FoundationオブジェクトからGameObject類を取得する
         for(int i = 0;i < 6; i++) {
             Transform _ft = Foundation[i].transform;
@@ -60,14 +60,13 @@ public class ContinueData : MonoBehaviour
         nowPage           = NowPage.GetComponent<NowPage>();
 
         //ページャーのインスタンスを取得する
-        CharaPager pager = CharaPager.instance;
+        CharaPager pager = CharaPager.Instance;
 
         //ページを1ページ目にしておく。
-        //pager.currentPageNumber = 0;
+        pager.CurrentPageNumber = 0;
 
         //ページャーが更新されたらPagerUpatedが読まれるようにする
-        pager.Observe()
-             .Attach(PagerUpdated);
+        m_Unsubscriber = pager.Subscribe(PagerUpdated);
 
         //キャラクターリストを描画
         DrawCharacterList();
@@ -75,10 +74,10 @@ public class ContinueData : MonoBehaviour
 
     //Destroyされたときに呼ばれるよ
     void OnDestroy() {
-        var pager = CharaPager.instance;
+        var pager = CharaPager.Instance;
         
         //ページャーのイベントリスナーを外すよ
-        pager.Observe().Deattach(PagerUpdated);
+        m_Unsubscriber?.Dispose();
     }
 
     void SetVisibilityOfButtons(bool prev, bool next) {
@@ -92,16 +91,16 @@ public class ContinueData : MonoBehaviour
 
     void DrawCharacterList() {
         //ページャーを取得
-        CharaPager pager = CharaPager.instance;
+        CharaPager pager = CharaPager.Instance;
 
         //現在のページ数を基にページ移動ボタンの状態を指定
-        SetVisibilityOfButtons(pager.currentPageNumber != 0,
-                               pager.currentPageNumber != (pager.pageCount - 1));
+        SetVisibilityOfButtons(pager.CurrentPageNumber != 0,
+                               pager.CurrentPageNumber != (pager.PageCount - 1));
 
         //ページ数・ページ番号を反映
         var pageIndicator = nowPage.GetComponent<NowPage>();
-        pageIndicator.NowPageNum1 = pager.currentPageNumber + 1;
-        pageIndicator.NowPageNum2 = pager.pageCount;
+        pageIndicator.NowPageNum1 = pager.CurrentPageNumber + 1;
+        pageIndicator.NowPageNum2 = pager.PageCount;
         NowPage.SetActive(true);
 
         //キャラクターリストをリセット
@@ -113,7 +112,7 @@ public class ContinueData : MonoBehaviour
             CharaConfirm[i].SetActive(false);
         }
 
-        var characters = pager.currentPage;
+        var characters = pager.CurrentPage;
 
         for(int i = 0; i < characters.Count; i++) {
             //冗長すぎるデータ書き換え欄...どうにかならぬものか（かえるむ）
