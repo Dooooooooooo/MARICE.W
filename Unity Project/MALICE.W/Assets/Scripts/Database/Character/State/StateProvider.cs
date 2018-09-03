@@ -82,6 +82,10 @@ namespace MW.Database.Character.State
         public void AddState(State state) {
             string stateName = state.StateName;
             
+            //名無しのStateを取り除くよ
+            if(stateName == null)
+                throw new NullReferenceException("Given state has no name.");
+            
             if(m_States.All(s => s.StateName != stateName)) { //同一名称のStateがなければ
                 m_States.Add(state); //追加する
                 

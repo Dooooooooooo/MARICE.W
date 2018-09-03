@@ -37,17 +37,23 @@ namespace MW.Database.Character.Parameter
         }
 
         private void SetValue(int value) {
-            if (m_Min <= value && value <= m_Max)
-                m_Value = value;
-            else
+            if (!SetValueIfValid(value))
                 throw new ArgumentOutOfRangeException("Given value " + value.ToString() + " is not in the range.");
+        }
+
+        private bool SetValueIfValid(int value) {
+            if (m_Min <= value && value <= m_Max) {
+                m_Value = value;
+                return true;
+            }
+            else return false;
         }
 
         /* クラス図に沿ったメソッド */
         
         public void SafetyIncrease(int point) {
             //インクリメントした値を算出
-            SetValue(m_Value + point);
+            SetValueIfValid(m_Value + point);
         }
 
         public void SafetyDecrease(int point) {
