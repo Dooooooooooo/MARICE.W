@@ -1,6 +1,16 @@
 ﻿<Properties StartupConfiguration="{D4473F0B-A133-8308-3979-AE7E82FBD82F}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Battle/Score.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Battle/HP.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/UI/Slider/HPText.cs" Line="12" Column="2" />
+      <File FileName="Assets/Scripts/UI/Slider/ScoreText.cs" Line="2" Column="1" />
+      <File FileName="Assets/Scripts/Battle/Time.cs" Line="42" Column="24" />
+      <File FileName="Assets/Scripts/Battle/Bomb.cs" Line="31" Column="49" />
+      <File FileName="Assets/Scripts/Battle/Elixir.cs" Line="27" Column="13" />
+      <File FileName="Assets/Scripts/Battle/Score.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
